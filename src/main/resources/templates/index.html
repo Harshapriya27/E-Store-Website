@@ -1,0 +1,267 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+
+<!--&lt;!&ndash;<head th:replace="fragments/layout :: head('Home - E-commerce Store')"></head>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash; Navigation &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<nav th:replace="fragments/layout :: navbar"></nav>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Alerts &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:replace="fragments/layout :: alerts"></div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Hero Section &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container-fluid p-0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="bg-primary bg-gradient text-white p-5 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="container py-5">&ndash;&gt;-->
+<!--&lt;!&ndash;            <h1 class="display-4">Welcome to Our E-commerce Store</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p class="lead">Find the best products at competitive prices.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a th:href="@{/products}" class="btn btn-light btn-lg">Shop Now</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Featured Products &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container my-5">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h2 class="text-center mb-4">Featured Products</h2>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="col" th:each="product : ${products}">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="card h-100 shadow-sm">&ndash;&gt;-->
+<!--&lt;!&ndash;                <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image"&ndash;&gt;-->
+<!--&lt;!&ndash;                     src="/images/placeholder.jpg" style="height: 200px; object-fit: cover;">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="card-body">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p class="card-text text-muted" th:text="${#strings.abbreviate(product.description, 100)}">Product Description</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="d-flex justify-content-between align-items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span class="fw-bold text-primary" th:text="${'$' + product.price}">$0.00</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-sm btn-outline-primary">View Details</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="text-center mt-4">&ndash;&gt;-->
+<!--&lt;!&ndash;        <a th:href="@{/products}" class="btn btn-primary">View All Products</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Features Section &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container-fluid bg-light py-5">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h2 class="text-center mb-4">Why Choose Us</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="row row-cols-1 row-cols-md-3 g-4 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="p-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <i class="fas fa-shipping-fast fa-3x text-primary mb-3"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <h4>Fast Shipping</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p>Quick delivery to your doorstep.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="p-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <h4>Secure Payments</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p>Safe and secure payment methods.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="p-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <i class="fas fa-undo fa-3x text-primary mb-3"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <h4>Easy Returns</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p>30-day return policy for all products.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Footer &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<footer th:replace="fragments/layout :: footer"></footer>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Scripts &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:replace="fragments/layout :: scripts"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head th:replace="fragments/layout :: head('Welcome to E-commerce Store')"></head>-->
+
+<!--<body>-->
+<!--&lt;!&ndash; Navigation &ndash;&gt;-->
+<!--<nav th:replace="fragments/layout :: navbar"></nav>-->
+
+<!--&lt;!&ndash; Hero Section &ndash;&gt;-->
+<!--<section class="jumbotron text-center">-->
+<!--    <div class="container">-->
+<!--        <h1>E-commerce Store</h1>-->
+<!--        <p class="lead text-muted">Discover the best products at affordable prices.</p>-->
+<!--        <a href="/products" class="btn btn-primary">View Products</a>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--&lt;!&ndash; Product Listing &ndash;&gt;-->
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div th:each="product : ${products}" class="col-md-4 mb-4">-->
+<!--            <div class="card">-->
+<!--                <img th:src="${product.imageUrl}" src="holder.js/100x225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Product Image" class="card-img-top">-->
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>-->
+<!--                    <p class="card-text" th:text="${product.description}">Product Description</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <div class="btn-group">-->
+<!--                            <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-sm btn-outline-secondary">View Details</a>-->
+<!--                        </div>-->
+<!--                        <small class="text-muted" th:text="${'$' + product.price}">$99.99</small>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+
+<!--&lt;!&ndash; Scripts &ndash;&gt;-->
+<!--<div th:replace="fragments/layout :: scripts"></div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: head('Welcome to E-Store - Your Online Shopping Destination')"></head>
+
+<body>
+<!-- Navigation -->
+<nav th:replace="fragments/layout :: navbar"></nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Welcome to E-Store</h1>
+                <p class="lead mb-4">Discover amazing products at unbeatable prices. Shop with confidence and enjoy fast, secure delivery.</p>
+                <div class="mb-4">
+                        <span class="badge bg-light text-dark me-2 p-2">
+                            <i class="fas fa-box me-1"></i><span th:text="${totalProducts}">0</span> Products Available
+                        </span>
+                    <span class="badge bg-light text-dark p-2">
+                            <i class="fas fa-shipping-fast me-1"></i>Free Shipping
+                        </span>
+                </div>
+                <a href="/products" class="btn btn-light btn-lg me-3">
+                    <i class="fas fa-shopping-bag me-2"></i>Shop Now
+                </a>
+                <a href="/about" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-info-circle me-2"></i>Learn More
+                </a>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-shopping-cart" style="font-size: 10rem; opacity: 0.3;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-12">
+                <h2 class="fw-bold">Why Choose E-Store?</h2>
+                <p class="lead text-muted">Experience the best in online shopping</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100 text-center border-0 shadow">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-shipping-fast text-primary" style="font-size: 3rem;"></i>
+                        </div>
+                        <h5 class="card-title">Fast Delivery</h5>
+                        <p class="card-text">Get your orders delivered quickly with our express shipping options.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100 text-center border-0 shadow">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-shield-alt text-success" style="font-size: 3rem;"></i>
+                        </div>
+                        <h5 class="card-title">Secure Shopping</h5>
+                        <p class="card-text">Shop with confidence using our secure payment system and data protection.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100 text-center border-0 shadow">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-headset text-info" style="font-size: 3rem;"></i>
+                        </div>
+                        <h5 class="card-title">24/7 Support</h5>
+                        <p class="card-text">Our customer support team is available round the clock to help you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="fw-bold">Featured Products</h2>
+                <p class="lead text-muted">Check out our most popular items</p>
+            </div>
+        </div>
+        <div class="row">
+            <div th:each="product : ${featuredProducts}" class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image" style="height: 200px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                        <p class="card-text flex-grow-1" th:text="${product.description}">Product Description</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </button>
+                                <button type="button" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                                </button>
+                            </div>
+                            <span class="text-primary fw-bold" th:text="${'$' + product.price}">$99.99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/products" class="btn btn-primary btn-lg">
+                <i class="fas fa-th-large me-2"></i>View All Products
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer th:replace="fragments/layout :: footer"></footer>
+
+<!-- Scripts -->
+<div th:replace="fragments/layout :: scripts"></div>
+</body>
+</html>

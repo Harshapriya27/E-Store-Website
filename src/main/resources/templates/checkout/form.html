@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: head('Checkout - E-commerce Store')"></head>
+
+<body>
+<!-- Navigation -->
+<nav th:replace="fragments/layout :: navbar"></nav>
+
+<!-- Alerts -->
+<div th:replace="fragments/layout :: alerts"></div>
+
+<!-- Checkout Section -->
+<div class="container my-5">
+    <h1 class="mb-4">Checkout</h1>
+
+    <div class="row">
+        <!-- Order Form -->
+        <div class="col-md-8 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Shipping Information</h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/checkout/process}" method="post">
+                        <!-- Customer Information -->
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="customerName" name="customerName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="customerEmail" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="customerEmail" name="customerEmail" required>
+                            <div class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="shippingAddress" class="form-label">Shipping Address *</label>
+                            <textarea class="form-control" id="shippingAddress" name="shippingAddress" rows="3" required></textarea>
+                        </div>
+
+                        <!-- Payment Information (Mock) -->
+                        <div class="mb-4">
+                            <h5 class="mb-3">Payment Method</h5>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
+                                <label class="form-check-label" for="creditCard">
+                                    Credit Card
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
+                                <label class="form-check-label" for="paypal">
+                                    PayPal
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer" value="bankTransfer">
+                                <label class="form-check-label" for="bankTransfer">
+                                    Bank Transfer
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-lock me-2"></i> Place Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+<!--        <div class="col-md-4">-->
+<!--            <div class="card shadow-sm mb-4">-->
+<!--                <div class="card-header bg-white">-->
+<!--                    <h5 class="mb-0">Order Summary</h5>-->
+<!--                </div>-->
+<!--                <div class="card-body">-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">-->
+<!--                            Products-->
+<!--                            <span th:text="${cart.itemCount + ' items'}">0 items</span>-->
+<!--                        </li>-->
+<!--                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">-->
+<!--                            Shipping-->
+<!--                            <span>Free</span>-->
+<!--                        </li>-->
+<!--                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">-->
+<!--                            <div>-->
+<!--                                <strong>Total amount</strong>-->
+<!--                            </div>-->
+<!--                            <span><strong th:text="${'$' + cart.totalAmount}">$0.00</strong></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+
+<!--                    <div class="mt-3">-->
+<!--                        <h6>Items in Cart:</h6>-->
+<!--                        <div th:each="item : ${cart.items}" class="d-flex justify-content-between align-items-center small mb-2">-->
+<!--                            <span th:text="${item.quantity + 'x ' + item.productName}">1x Product</span>-->
+<!--                            <span th:text="${'$' + item.subtotal}">$0.00</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+        <!-- Order Summary -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                            Products
+                            <!-- This is where itemCount should be -->
+                            <span th:text="${cart.itemCount + ' items'}">0 items</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            Shipping
+                            <span>Free</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                            <div>
+                                <strong>Total amount</strong>
+                            </div>
+                            <!-- This is where totalAmount should be -->
+                            <span><strong th:text="${'$' + cart.totalAmount}">$0.00</strong></span>
+                        </li>
+                    </ul>
+
+                    <!-- Items list (additional spot where cart items are shown) -->
+                    <div class="mt-3">
+                        <h6>Items in Cart:</h6>
+                        <div th:each="item : ${cart.items}" class="d-flex justify-content-between align-items-center small mb-2">
+                            <span th:text="${item.quantity + 'x ' + item.productName}">1x Product</span>
+                            <span th:text="${'$' + item.subtotal}">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card shadow-sm">
+                <div class="card-body">
+                    <a th:href="@{/cart}" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="fragments/layout :: footer"></footer>
+
+<!-- Scripts -->
+<div th:replace="fragments/layout :: scripts"></div>
+</body>
+
+</html>

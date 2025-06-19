@@ -1,0 +1,270 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+
+<!--&lt;!&ndash;<head th:fragment="head(title)">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title th:text="${title}">E-commerce Store</title>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Bootstrap CSS &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Font Awesome &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Custom CSS &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/styles.css}">&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash; Navigation &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;        <a class="navbar-brand" th:href="@{/}">E-commerce Store</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&ndash;&gt;-->
+<!--&lt;!&ndash;                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">&ndash;&gt;-->
+<!--&lt;!&ndash;            <span class="navbar-toggler-icon"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="collapse navbar-collapse" id="navbarNav">&ndash;&gt;-->
+<!--&lt;!&ndash;            <ul class="navbar-nav me-auto">&ndash;&gt;-->
+<!--&lt;!&ndash;                <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a class="nav-link" th:href="@{/}">Home</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a class="nav-link" th:href="@{/products}">Products</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                </li>&ndash;&gt;-->
+<!--&lt;!&ndash;            </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="@{/cart}" class="btn btn-outline-light">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <i class="fas fa-shopping-cart"></i> Cart&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span class="badge bg-danger" th:if="${session.cart != null and session.cart.itemCount > 0}"&ndash;&gt;-->
+<!--&lt;!&ndash;                          th:text="${session.cart.itemCount}">0</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</nav>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Alert Messages &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:fragment="alerts" class="container mt-3">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">&ndash;&gt;-->
+<!--&lt;!&ndash;        <span th:text="${success}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">&ndash;&gt;-->
+<!--&lt;!&ndash;        <span th:text="${error}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Footer &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<footer th:fragment="footer" class="bg-dark text-white py-4 mt-5">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h5>E-commerce Store</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>Your one-stop shop for all your needs.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col-md-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h5>Quick Links</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                <ul class="list-unstyled">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li><a href="#" class="text-white">About Us</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li><a href="#" class="text-white">Contact</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li><a href="#" class="text-white">FAQ</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col-md-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h5>Follow Us</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="d-flex">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <hr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;            <p>&copy; 2025 E-commerce Store. All rights reserved.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</footer>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Scripts fragment &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash; Scripts fragment &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:fragment="scripts">&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash; Bootstrap JS Bundle with Popper &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash; Custom JS &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <script th:src="@{/js/main.js}"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:fragment="head(title)">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title th:text="${title}"></title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--    <div class="container">-->
+<!--        <a class="navbar-brand" th:href="@{/}">E-commerce</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--            <ul class="navbar-nav">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/}">Home</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/products}">Products</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/cart}">-->
+<!--                        <i class="fas fa-shopping-cart"></i> Cart-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--<div th:fragment="alerts" class="container mt-3">-->
+<!--    &lt;!&ndash; Alerts will be displayed here &ndash;&gt;-->
+<!--</div>-->
+
+<!--<footer th:fragment="footer" class="bg-light text-center py-3">-->
+<!--    <p>&copy; 2023 E-commerce Store</p>-->
+<!--</footer>-->
+
+<!--<th:block th:fragment="scripts">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--</th:block>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">E-commerce Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        .feature-card {
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-shopping-cart me-2"></i>E-Store
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="/" class="text-light text-decoration-none">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about" class="text-light text-decoration-none">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact" class="text-light text-decoration-none">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/cart" class="text-light text-decoration-none">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="text-light text-decoration-none">Login</a>
+                </li>
+
+<!--            </ul>-->
+<!--            <ul class="navbar-nav">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Cart (0)</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+        </div>
+    </div>
+</nav>
+
+<footer th:fragment="footer" class="mt-5 py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5><i class="fas fa-shopping-cart me-2"></i>E-Store</h5>
+                <p>Your trusted online shopping destination for quality products at affordable prices.</p>
+            </div>
+            <div class="col-md-2">
+                <h6>Quick Links</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/" class="text-light text-decoration-none">Home</a></li>
+                    <li><a href="/about" class="text-light text-decoration-none">About</a></li>
+                    <li><a href="/contact" class="text-light text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>Contact Info</h6>
+                <p class="mb-1"><i class="fas fa-envelope me-2"></i>info@estore.com</p>
+                <p class="mb-1"><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt me-2"></i>123 Commerce St, City</p>
+            </div>
+            <div class="col-md-3">
+                <h6>Follow Us</h6>
+                <div>
+                    <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="text-center">
+            <p>&copy; 2025 E-Store. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<div th:fragment="scripts">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div>
+
+<!-- alerts fragment -->
+<div th:fragment="alerts">
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+</div>
