@@ -43,7 +43,6 @@ com.ecommerce/
 ├── model/           # Domain entities
 ├── repository/      # Data access interfaces
 ├── service/         # Business logic
-└── util/            # Utility classes
 ```
 
 ## 🚀 Getting Started
@@ -123,12 +122,14 @@ server.servlet.session.timeout=3600
 
 Key entities:
 - User
+- admin
 - Product
-- Category
 - Cart
 - CartItem
 - Order
 - OrderItem
+- Checkout
+- Confirmation
 
 ## 🔒 Security Implementation
 
