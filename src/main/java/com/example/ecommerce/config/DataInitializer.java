@@ -93,15 +93,15 @@ public class DataInitializer implements CommandLineRunner {
         if (productRepository.count() == 0) {
             // Create sample products
             productRepository.save(new Product("Laptop", "High-performance laptop for work and gaming",
-                    new BigDecimal("999.99"), "https://via.placeholder.com/300x200", true, 10));
+                    new BigDecimal("999.99"), "https://cdn.tgdd.vn/Files/2022/07/24/1450033/laptop-man-hinh-full-hd-la-gi-kinh-nghiem-chon-mu-9.jpg", true, 10));
             productRepository.save(new Product("Smartphone", "Latest smartphone with advanced features",
-                    new BigDecimal("699.99"), "https://via.placeholder.com/300x200", true, 25));
+                    new BigDecimal("699.99"), "https://cdn.pixabay.com/photo/2017/02/03/12/46/whatsapp-2035059_960_720.jpg", true, 25));
             productRepository.save(new Product("Headphones", "Wireless noise-cancelling headphones",
-                    new BigDecimal("299.99"), "https://via.placeholder.com/300x200", true, 15));
+                    new BigDecimal("299.99"), "https://th.bing.com/th/id/OIP.NNl3-3u5syrfJ4qrp9U53gHaDt?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3", true, 15));
             productRepository.save(new Product("Tablet", "10-inch tablet for entertainment and productivity",
-                    new BigDecimal("399.99"), "https://via.placeholder.com/300x200", false, 20));
+                    new BigDecimal("399.99"), "https://images.pexels.com/photos/1334597/pexels-photo-1334597.jpeg?cs=srgb&dl=table-technology-ipad-1334597.jpg&fm=jpg", false, 20));
             productRepository.save(new Product("Smart Watch", "Fitness tracking smartwatch",
-                    new BigDecimal("249.99"), "https://via.placeholder.com/300x200", true, 30));
+                    new BigDecimal("249.99"), "https://m.media-amazon.com/images/I/71KjTSO8M9L._SL1500_.jpg", true, 30));
         }
 
         // Create default admin if not exists
