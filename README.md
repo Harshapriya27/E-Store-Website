@@ -2,7 +2,7 @@
 
 A comprehensive e-store platform built using **Java 17**, **Spring Boot 3.2**, **Thymeleaf**, and **MySQL**, offering end-to-end online shopping functionality.
 
----
+
 
 ## 💻 Tech Stack
 
@@ -24,7 +24,7 @@ A comprehensive e-store platform built using **Java 17**, **Spring Boot 3.2**, *
 **Build Tool**  
 🔧 Maven
 
----
+
 
 ## 📋 Features
 
@@ -35,7 +35,7 @@ A comprehensive e-store platform built using **Java 17**, **Spring Boot 3.2**, *
 - 📱 **Responsive Design**: Works on both mobile and desktop  
 - 🔐 **Security**: Role-based access, BCrypt encoding, CSRF protection  
 
----
+
 
 ## 🏗️ Project Structure
 
@@ -51,7 +51,7 @@ com.ecommerce/
 
 ```
 
----
+
 
 ## 🚀 Getting Started
 
@@ -79,7 +79,7 @@ mvn spring-boot\:run
 
 > App will run at `http://localhost:8080`
 
----
+
 
 ## ⚙️ Configuration
 
@@ -98,7 +98,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
 ```
 
----
+
 
 ## 🔒 Security
 
@@ -108,14 +108,14 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 - XSS and CSRF protection  
 - (Optional) JWT for APIs
 
----
+
 
 ## 📄 API Documentation
 
 - Swagger UI → `http://localhost:8080/swagger-ui.html`  
 - OpenAPI Docs → `http://localhost:8080/v3/api-docs`
 
----
+
 
 ## 🧪 Testing
 
@@ -132,7 +132,7 @@ mvn test -Dtest=UserServiceTest  # Run specific test
 
 > (Insert screenshots here once available)
 
----
+
 
 ## 📚 What I Learned
 
@@ -143,7 +143,7 @@ mvn test -Dtest=UserServiceTest  # Run specific test
 - Environment configuration for dev vs prod  
 - End-to-end flow from product to checkout
 
----
+
 
 ## 🚢 Deployment Considerations
 
@@ -152,7 +152,7 @@ mvn test -Dtest=UserServiceTest  # Run specific test
 - Enable HTTPS  
 - Add Redis or in-memory caching if needed
 
----
+
 
 ## 🤝 Contributing
 
@@ -162,13 +162,13 @@ mvn test -Dtest=UserServiceTest  # Run specific test
 4. Push: `git push origin feature/awesome-feature`  
 5. Open a pull request ✅
 
----
+
 
 ## 📜 License
 
 Licensed under the **MIT License**. See the `LICENSE` file for details.
 
----
+
 
 ## 🙏 Acknowledgements
 
@@ -176,6 +176,3 @@ Licensed under the **MIT License**. See the `LICENSE` file for details.
 - Thymeleaf for templating  
 - Bootstrap for design  
 - All open-source contributors
-
-```
-
