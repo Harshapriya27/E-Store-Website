@@ -1,190 +1,181 @@
-# Spring Boot E-commerce Application
+# 🛒 Spring Boot E-store Application
 
-A comprehensive e-commerce platform built with Spring Boot, providing a complete solution for online shopping with user management, product catalog, shopping cart functionality, and more.
+A comprehensive e-store platform built using **Java 17**, **Spring Boot 3.2**, **Thymeleaf**, and **MySQL**, offering end-to-end online shopping functionality.
+
+---
+
+## 💻 Tech Stack
+
+**Backend**  
+🟦 Java 17  
+🟩 Spring Boot 3.2.0  
+🟨 Spring Data JPA  
+🟨 RESTful API
+
+**Frontend**  
+🟧 Thymeleaf  
+🔵 Bootstrap 5  
+🟨 HTML5, CSS3, JavaScript
+
+**Database**  
+🟨 H2 (for development)  
+🟦 MySQL / PostgreSQL (for production)
+
+**Build Tool**  
+🔧 Maven
+
+---
 
 ## 📋 Features
 
-- **User Management**: Registration, authentication, and profile management
-- **Product Catalog**: Browsing, searching, and filtering products
-- **Category Management**: Hierarchical product categorization
-- **Shopping Cart**: Add, update, remove items and calculate totals
-- **Responsive Design**: Optimized for both desktop and mobile devices
-- **Security**: Role-based access control and secure authentication
+- 👤 **User Management**: Registration, login, roles, profile updates  
+- 🛍️ **Product Catalog**: View, search, and filter products by category  
+- 🗂️ **Category Management**: Hierarchical product classification  
+- 🛒 **Shopping Cart**: Add, update, remove items, calculate totals  
+- 📱 **Responsive Design**: Works on both mobile and desktop  
+- 🔐 **Security**: Role-based access, BCrypt encoding, CSRF protection  
 
-## 🛠️ Technology Stack
+---
 
-- **Backend**:
-  - Java 17
-  - Spring Boot 3.2.0
-  - Spring Security
-  - Spring Data JPA
-  - RESTful API architecture
-  
-- **Frontend**:
-  - Thymeleaf templates
-  - Bootstrap 5
-  - HTML5/CSS3/JavaScript
-  
-- **Database**:
-  - H2 (Development)
-  - MySQL/PostgreSQL (Production)
-  
-- **Build Tools**:
-  - Maven
-
-## 🏗️ Architecture
-
-The application follows a standard Spring MVC architecture:
+## 🏗️ Project Structure
 
 ```
+
 com.ecommerce/
-├── config/          # Application configuration
-├── controller/      # HTTP request handlers
-├── model/           # Domain entities
-├── repository/      # Data access interfaces
+├── config/          # Security & application config
+├── controller/      # REST & Web controllers
+├── model/           # JPA Entities
+├── repository/      # Spring Data JPA interfaces
 ├── service/         # Business logic
+└── EcommerceApplication.java  # Entry point
+
 ```
+
+---
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### ✅ Prerequisites
 
 - JDK 17+
 - Maven 3.6+
-- IntelliJ IDEA (recommended)
+- IntelliJ IDEA
 - Git
 
-### Running in IntelliJ IDEA
+### ▶️ Run with IntelliJ
 
-1. Open IntelliJ IDEA
-2. Select `File > Open` and navigate to the project directory
-3. Wait for IntelliJ to import the Maven project
-4. Run the application by right-clicking on `EcommerceApplication.java` and selecting `Run`
+1. Open IntelliJ and import the project as a Maven project  
+2. Locate `EcommerceApplication.java`  
+3. Right-click > Run
 
-### Running with Maven
+### ▶️ Run with Maven
 
-```bash
-# Build the project
-mvn clean install
-
-# Run the application
-mvn spring-boot:run
 ```
 
-### Accessing the Application
+mvn clean install
+mvn spring-boot\:run
 
-Once running, the application is available at:
-- http://localhost:8080
+```
+
+> App will run at `http://localhost:8080`
+
+---
 
 ## ⚙️ Configuration
 
-### Database Configuration
+### Database
 
-The application uses H2 in-memory database by default. To configure a persistent database:
+By default, uses in-memory **H2**. To use **MySQL**:
 
-1. Update `application.properties`:
+`src/main/resources/application.properties`
+```
 
-```properties
-# MySQL Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/ecommercedb
+spring.datasource.url=jdbc\:mysql://localhost:3306/ecommercedb
 spring.datasource.username=root
 spring.datasource.password=yourpassword
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
 ```
 
-2. Add the appropriate database dependency to `pom.xml`
+---
 
-### Application Properties
+## 🔒 Security
 
-Customize application behavior in `application.properties`:
+- Spring Security + BCrypt Password Encoder  
+- Form-based login with session timeout  
+- Role-based authorization (ADMIN / USER)  
+- XSS and CSRF protection  
+- (Optional) JWT for APIs
 
-```properties
-# Server configuration
-server.port=8080
+---
 
-# Logging
-logging.level.org.springframework=INFO
-logging.level.com.ecommerce=DEBUG
+## 📄 API Documentation
 
-# File uploads
-spring.servlet.multipart.max-file-size=10MB
-spring.servlet.multipart.max-request-size=10MB
+- Swagger UI → `http://localhost:8080/swagger-ui.html`  
+- OpenAPI Docs → `http://localhost:8080/v3/api-docs`
 
-# Session timeout (in seconds)
-server.servlet.session.timeout=3600
-```
-
-## 🗄️ Database Schema
-
-![Database Schema](https://via.placeholder.com/800x600?text=Database+Schema)
-
-Key entities:
-- User
-- admin
-- Product
-- Cart
-- CartItem
-- Order
-- OrderItem
-- Checkout
-- Confirmation
-
-## 🔒 Security Implementation
-
-The application uses Spring Security with:
-
-- Form-based authentication
-- BCrypt password encoding
-- JWT tokens for API authentication (if applicable)
-- Role-based access control (USER, ADMIN)
-- CSRF protection
-- XSS prevention
-
-## 📝 API Documentation
-
-REST API documentation is available at:
-- Swagger UI: http://localhost:8080/swagger-ui.html
-- API Docs: http://localhost:8080/v3/api-docs
+---
 
 ## 🧪 Testing
 
-### Running Tests
-
-```bash
-# Run all tests
-mvn test
-
-# Run specific test
-mvn test -Dtest=UserServiceTest
 ```
 
-## 🚢 Deployment
+mvn test                     # Run all tests
+mvn test -Dtest=UserServiceTest  # Run specific test
 
-### Production Considerations
+```
 
-1. Configure a production database (MySQL/PostgreSQL)
-2. Set appropriate logging levels
-3. Enable HTTPS
-4. Configure connection pooling
-5. Set up caching where appropriate
+---
 
-## 👥 Contributing
+## 📸 Screenshots
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+> (Insert screenshots here once available)
+
+---
+
+## 📚 What I Learned
+
+- Integrating Spring Security with form login and roles  
+- CRUD implementation using Spring Data JPA  
+- Using Thymeleaf for server-side rendering  
+- Building REST APIs and securing them  
+- Environment configuration for dev vs prod  
+- End-to-end flow from product to checkout
+
+---
+
+## 🚢 Deployment Considerations
+
+- Use MySQL/PostgreSQL in production  
+- Set server port, logging, and connection pooling  
+- Enable HTTPS  
+- Add Redis or in-memory caching if needed
+
+---
+
+## 🤝 Contributing
+
+1. Fork this repo  
+2. Create a feature branch: `git checkout -b feature/awesome-feature`  
+3. Commit changes: `git commit -m "Add awesome feature"`  
+4. Push: `git push origin feature/awesome-feature`  
+5. Open a pull request ✅
+
+---
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Licensed under the **MIT License**. See the `LICENSE` file for details.
+
+---
 
 ## 🙏 Acknowledgements
 
-- Spring Boot and Spring Framework teams
-- Thymeleaf template engine
-- Bootstrap for responsive design
-- All open-source libraries used
+- Spring Boot & Spring Security Teams  
+- Thymeleaf for templating  
+- Bootstrap for design  
+- All open-source contributors
+
+```
+
