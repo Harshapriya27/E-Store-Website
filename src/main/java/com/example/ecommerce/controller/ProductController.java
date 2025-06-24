@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -24,7 +23,7 @@ public class ProductController {
 
     @GetMapping
     public String getAllProducts(Model model) {
-        List<Product> products = productService.getAllProducts();
+        List<Product> products = productService.getAvailableProducts(); // ✅ Show only available
         model.addAttribute("products", products);
         model.addAttribute("pageTitle", "All Products");
         return "products/list";
@@ -36,8 +35,16 @@ public class ProductController {
         if (product == null) {
             return "redirect:/products";
         }
+
         model.addAttribute("product", product);
         model.addAttribute("pageTitle", product.getName());
+
+        // ✅ Add return/exchange info for display
+        model.addAttribute("returnable", product.isReturnable());
+        model.addAttribute("exchangeable", product.isExchangeable());
+        model.addAttribute("returnDays", product.getReturnWithinDays());
+        model.addAttribute("exchangeDays", product.getExchangeWithinDays());
+
         return "products/detail";
     }
 }

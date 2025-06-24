@@ -64,12 +64,14 @@
 
 package com.example.ecommerce.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
-public class CartItem {
+public class CartItem implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long productId;
     private String productName;
     private BigDecimal productPrice;

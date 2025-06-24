@@ -9,24 +9,74 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 public class Order {
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+    public enum OrderStatus {
+        PENDING,
+        CONFIRMED,
+        SHIPPED,
+        DELIVERED,
+        CANCELLED,
+        RETURN_REQUESTED,
+        RETURNED,
+        EXCHANGE_REQUESTED,
+        EXCHANGED
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String customerName;
-
     private String customerEmail;
-
     private String shippingAddress;
-
     private BigDecimal totalAmount;
 
     private LocalDateTime orderDate = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.PENDING;
+
+    private String returnReason;
+    private String exchangeReason;
+    private String cancelReason;
+
+    public String getReturnReason() {
+        return returnReason;
+    }
+
+    public String getExchangeReason() {
+        return exchangeReason;
+    }
+
+    public void setExchangeReason(String exchangeReason) {
+        this.exchangeReason = exchangeReason;
+    }
+
+    public String getCancelReason() {
+        return cancelReason;
+    }
+
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
+    }
+
+    public void setReturnReason(String returnReason) {
+        this.returnReason = returnReason;
+    }
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
+
+    // === Getters and Setters ===
 
     public Long getId() {
         return id;
@@ -92,13 +142,11 @@ public class Order {
         this.items = items;
     }
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status = OrderStatus.PENDING;
+    public User getUser() {
+        return user;
+    }
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items = new ArrayList<>();
-
-    public enum OrderStatus {
-        PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
+    public void setUser(User user) {
+        this.user = user;
     }
 }

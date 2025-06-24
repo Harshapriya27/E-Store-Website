@@ -4,6 +4,8 @@ import com.example.ecommerce.model.User;
 import com.example.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,11 +21,25 @@ public class UserService {
         return userRepository.save(user);
     }
 
+//    public boolean emailExists(String email) {
+//        return userRepository.existsByEmail(email);
+//    }
+
+    public boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
     public Optional<User> authenticateUser(String email, String password) {
+        return Optional.ofNullable(validateUser(email, password));
+    }
+
+    public User validateUser(String email, String password) {
+        // Basic validation — replace with hashed password check in real app
         return userRepository.findByEmailAndPassword(email, password);
     }
 
-    public boolean emailExists(String email) {
-        return userRepository.existsByEmail(email);
-    }
 }

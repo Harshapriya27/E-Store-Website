@@ -32,34 +32,80 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
+    public List<Order> getOrdersByUser(User user) {
+        return orderRepository.findByUser(user);
+    }
+
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
+    }
+
     @Transactional
-    public Order createOrder(String customerName, String customerEmail, String shippingAddress, ShoppingCart cart) {
+    public void returnOrder(Long orderId, User user) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        if (!order.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Unauthorized access");
+        }
+        order.setStatus(Order.OrderStatus.RETURN_REQUESTED);
+        orderRepository.save(order);
+    }
+
+    @Transactional
+    public void cancelOrder(Long orderId, User user) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        if (!order.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Unauthorized access");
+        }
+        order.setStatus(Order.OrderStatus.CANCELLED);
+        orderRepository.save(order);
+    }
+
+    @Transactional
+    public void exchangeOrder(Long orderId, User user) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        if (!order.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Unauthorized access");
+        }
+        order.setStatus(Order.OrderStatus.EXCHANGE_REQUESTED);
+        orderRepository.save(order);
+    }
+
+
+    @Transactional
+    public Order createOrder(User user, String customerName, String customerEmail, String shippingAddress, ShoppingCart cart) {
         // Create new order
         Order order = new Order();
+        order.setUser(user); // ✅ Associate with logged-in user
         order.setCustomerName(customerName);
         order.setCustomerEmail(customerEmail);
         order.setShippingAddress(shippingAddress);
         order.setOrderDate(LocalDateTime.now());
         order.setStatus(Order.OrderStatus.CONFIRMED);
         order.setTotalAmount(cart.getTotalAmount());
+        order.setUser(user); // make sure this is in your Order model
 
         // Add order items from cart
         for (CartItem cartItem : cart.getItems()) {
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);
 
-            // Get the product from the database
+            // Get product from DB
             Product product = productRepository.findById(cartItem.getProductId())
                     .orElseThrow(() -> new RuntimeException("Product not found: " + cartItem.getProductId()));
 
-            // Update product stock
+            // Validate stock
             int newStock = product.getStock() - cartItem.getQuantity();
             if (newStock < 0) {
                 throw new RuntimeException("Not enough stock for product: " + product.getName());
             }
+
             product.setStock(newStock);
             productRepository.save(product);
 
+            // Add item to order
             orderItem.setProduct(product);
             orderItem.setQuantity(cartItem.getQuantity());
             orderItem.setPrice(cartItem.getProductPrice());
@@ -69,4 +115,5 @@ public class OrderService {
 
         return orderRepository.save(order);
     }
+
 }
