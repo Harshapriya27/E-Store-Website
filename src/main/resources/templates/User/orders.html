@@ -51,6 +51,117 @@
 <!--<div th:replace="fragments/layout :: scripts"></div>-->
 <!--</body>-->
 <!--</html>-->
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="fragments/layout :: head('Your Orders - E-commerce Store')"></head>-->
+<!--<body>-->
+<!--<nav th:replace="fragments/layout :: navbar"></nav>-->
+
+<!--<div class="container my-5">-->
+<!--    <h2>Your Orders</h2>-->
+
+<!--    &lt;!&ndash; ✅ Flash messages &ndash;&gt;-->
+<!--    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>-->
+<!--    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>-->
+
+<!--    &lt;!&ndash; ✅ If no orders &ndash;&gt;-->
+<!--    <div th:if="${orders.isEmpty()}" class="alert alert-info">No orders yet.</div>-->
+
+<!--    &lt;!&ndash; ✅ Loop through orders &ndash;&gt;-->
+<!--    <div th:each="order : ${orders}">-->
+<!--        <div class="card mb-4 shadow-sm">-->
+<!--            <div class="card-body">-->
+<!--                <h5>-->
+<!--                    Order #<span th:text="${order.id}"></span>-->
+<!--                    <button class="btn btn-sm btn-link float-end" type="button"-->
+<!--                            data-bs-toggle="collapse"-->
+<!--                            th:attr="data-bs-target='#orderDetails__${order.id}'"-->
+<!--                            aria-expanded="false">-->
+<!--                        View Items-->
+<!--                    </button>-->
+<!--                </h5>-->
+<!--                <p>Status: <span class="badge bg-success" th:text="${order.status}"></span></p>-->
+<!--                <p>Placed On: <span th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></span></p>-->
+
+<!--                &lt;!&ndash; ✅ Collapsible order items with product image &ndash;&gt;-->
+<!--                <div th:id="'orderDetails__' + ${order.id}" class="collapse mt-3">-->
+<!--                    <ul class="list-group mb-3" th:each="item : ${order.items}">-->
+<!--                        <li class="list-group-item d-flex align-items-center">-->
+<!--                            &lt;!&ndash; ✅ Product image &ndash;&gt;-->
+<!--                            <img th:src="${item.product.imageUrl}" alt="Product Image"-->
+<!--                                 class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" />-->
+
+<!--                            &lt;!&ndash; ✅ Product info &ndash;&gt;-->
+<!--                            <div class="flex-grow-1">-->
+<!--                                <div class="fw-bold" th:text="${item.product.name}"></div>-->
+<!--                                <div class="text-muted">-->
+<!--                                    Quantity: <span th:text="${item.quantity}"></span>,-->
+<!--                                    Price: ₹<span th:text="${item.price}"></span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; ✅ Subtotal &ndash;&gt;-->
+<!--                            <div class="fw-bold text-end text-success">-->
+<!--                                ₹<span th:text="${item.price * item.quantity}"></span>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
+
+
+<!--                <p class="fw-bold">Total: ₹<span th:text="${order.totalAmount}"></span></p>-->
+
+<!--                &lt;!&ndash; ✅ Show action forms only if within 7 days &ndash;&gt;-->
+<!--                <div class="mt-2"-->
+<!--                     th:if="${T(java.time.Duration).between(order.orderDate, T(java.time.LocalDateTime).now()).toDays() <= 7}">-->
+
+<!--                    &lt;!&ndash; Return &ndash;&gt;-->
+<!--                    <form th:action="@{/order/return}" method="post" class="d-inline me-2"-->
+<!--                          onsubmit="return confirm('Are you sure you want to return this order?')">-->
+<!--                        <input type="hidden" name="orderId" th:value="${order.id}" />-->
+<!--                        <select name="reason" class="form-select form-select-sm d-inline w-auto me-2">-->
+<!--                            <option value="Damaged">Damaged</option>-->
+<!--                            <option value="Wrong item">Wrong item</option>-->
+<!--                            <option value="Not as described">Not as described</option>-->
+<!--                        </select>-->
+<!--                        <button type="submit" class="btn btn-warning btn-sm">Return</button>-->
+<!--                    </form>-->
+
+<!--                    &lt;!&ndash; Exchange &ndash;&gt;-->
+<!--                    <form th:action="@{/order/exchange}" method="post" class="d-inline me-2"-->
+<!--                          onsubmit="return confirm('Are you sure you want to exchange this order?')">-->
+<!--                        <input type="hidden" name="orderId" th:value="${order.id}" />-->
+<!--                        <select name="reason" class="form-select form-select-sm d-inline w-auto me-2">-->
+<!--                            <option value="Size issue">Size issue</option>-->
+<!--                            <option value="Received wrong product">Wrong product</option>-->
+<!--                            <option value="Need replacement">Need replacement</option>-->
+<!--                        </select>-->
+<!--                        <button type="submit" class="btn btn-info btn-sm">Exchange</button>-->
+<!--                    </form>-->
+
+<!--                    &lt;!&ndash; Cancel &ndash;&gt;-->
+<!--                    <form th:action="@{/order/cancel}" method="post" class="d-inline"-->
+<!--                          onsubmit="return confirm('Are you sure you want to cancel this order?')">-->
+<!--                        <input type="hidden" name="orderId" th:value="${order.id}" />-->
+<!--                        <button type="submit" class="btn btn-danger btn-sm">Cancel</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; ❌ If action window expired &ndash;&gt;-->
+<!--                <div class="text-muted mt-2"-->
+<!--                     th:if="${T(java.time.Duration).between(order.orderDate, T(java.time.LocalDateTime).now()).toDays() > 7}">-->
+<!--                    Return/Cancel window expired.-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+<!--<div th:replace="fragments/layout :: scripts"></div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout :: head('Your Orders - E-commerce Store')"></head>
@@ -71,31 +182,29 @@
     <div th:each="order : ${orders}">
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
-                <h5>
-                    Order #<span th:text="${order.id}"></span>
-                    <button class="btn btn-sm btn-link float-end" type="button"
-                            data-bs-toggle="collapse"
-                            th:attr="data-bs-target='#orderDetails__${order.id}'"
-                            aria-expanded="false">
-                        View Items
-                    </button>
-                </h5>
+                <h5>Order #<span th:text="${order.id}"></span></h5>
                 <p>Status: <span class="badge bg-success" th:text="${order.status}"></span></p>
                 <p>Placed On: <span th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></span></p>
 
-                <!-- ✅ Collapsible order items -->
-                <div th:id="'orderDetails__' + ${order.id}" class="collapse mt-3">
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center"
-                            th:each="item : ${order.items}">
-                            <span>
-                                <strong th:text="${item.product.name}"></strong>
-                                <span th:text="| - ${item.quantity} x ₹${item.price}|"></span>
-                            </span>
-                            <span th:text="|₹${item.price * item.quantity}|"></span>
-                        </li>
-                    </ul>
-                </div>
+                <!-- ✅ Always-visible order items with image -->
+                <ul class="list-group mb-3 mt-3" th:each="item : ${order.items}">
+                    <li class="list-group-item d-flex align-items-center">
+                        <img th:src="${item.product.imageUrl}" alt="Product Image"
+                             class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" />
+
+                        <div class="flex-grow-1">
+                            <div class="fw-bold" th:text="${item.product.name}"></div>
+                            <div class="text-muted">
+                                Quantity: <span th:text="${item.quantity}"></span>,
+                                Price: ₹<span th:text="${item.price}"></span>
+                            </div>
+                        </div>
+
+                        <div class="fw-bold text-end text-success">
+                            ₹<span th:text="${item.price * item.quantity}"></span>
+                        </div>
+                    </li>
+                </ul>
 
                 <p class="fw-bold">Total: ₹<span th:text="${order.totalAmount}"></span></p>
 
